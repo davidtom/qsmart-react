@@ -1,11 +1,20 @@
 import React from 'react';
-import JoinLine from './components/JoinLine'
+import {Route} from "react-router-dom"
 import './App.css';
+import NavBar from './components/NavBar';
+import LineShowPage from './components/LineShowPage';
+import {SiteFooter} from "./components/PageAssets";
+
 
 class App extends React.Component {
   render() {
     return (
-      <JoinLine />
+      <div>
+        < Route path="/" component={NavBar} />
+        < Route path = "/line/" render={(props)=>
+          (< LineShowPage {...props} />)} />
+      < SiteFooter />
+      </div>
     )
   }
 }

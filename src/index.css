@@ -3,3 +3,35 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+div.nav {
+  float: left;
+}
+
+#page-header {
+  font-size: 3rem;
+}
+
+#section-header {
+  color: white;
+  background-color: rgb(8, 60, 142);
+}
+
+p, li {
+  font-size: 1.5rem;
+}
+
+/*Sticky Footer*/
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+footer {
+  text-align: center;
+}

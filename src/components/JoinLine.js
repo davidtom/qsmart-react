@@ -1,9 +1,13 @@
 import React from 'react';
-import { Input, Button, Container } from 'semantic-ui-react'
+import { Redirect } from 'react-router'
+import {APIURL} from "./PageAssets"
+import { Container, Input, Button, Message } from 'semantic-ui-react'
 
 class JoinLine extends React.Component{
   state = {
-    code: ''
+    code: '',
+    error: false,
+    lineId: null
   }
 
   updateStateCode = (event) => {
@@ -22,17 +26,32 @@ class JoinLine extends React.Component{
       },
       body: JSON.stringify({code: this.state.code})
     }
-    fetch("http://localhost:3000/api/v1/lines_users", options)
-      .then(resp => resp.json())
-      .then(json => console.log(json))
+    fetch(`${APIURL()}/lines_users`, options)
+      .then(this.handleResponse)
+  }
+
+  handleResponse = (resp) => {
+    if (resp.status === 200){
+      this.setState({
+        error: false
+      })
+      resp.json()
+      .then(json => this.setState({lineId: json.line_id}))
+    } else if (resp.status === 404){
+      this.setState({
+        error: true
+      })
+    }
   }
 
   render(){
     return(
-      <Container >
-        <Input label="Join Line Code" placeholder="Enter code here" onChange={this.updateStateCode}/>
-        <Button onClick={this.joinLine}>Join line!</Button>
-      </Container >
+      <Container className="nav">
+        <Input size="huge" label="Line Code:" placeholder="Enter code..." onChange={this.updateStateCode}/>
+        <Button positive size="huge" onClick={this.joinLine}>Join line!</Button>
+        {this.state.error && <Message negative>Invalid Line Code</Message>}
+        {this.state.lineId && <Redirect to={`/line/${this.state.lineId}`} />}
+      </Container>
     )
   }
 }
