@@ -19,13 +19,3 @@ const Line = (props) => {
 }
 
 export default Line;
-
-
-
-
-
-// <ol>
-//   {props.line.users.map( user => {
-//     return <UserInLine user={user} />
-//   })}
-// </ol>

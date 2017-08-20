@@ -7,26 +7,16 @@ import { Container } from 'semantic-ui-react'
 class LineShowPage extends React.Component {
   constructor() {
     super()
-
-    this.state = {
-      line: {
-        line: {},
-        users: []
-      }
-      }
   }
 
   componentDidMount(){
-    let lineId = window.location.href.match(/\d$/)[0]
-    fetch(`${APIURL()}/lines/${lineId}`)
-    .then(resp => resp.json())
-    .then(json => this.setState({line: json}))
+    // NOTE: will we ever need this? should we need this?
   }
 
   render(){
     return (
       <Container textAlign="center" className="Site">
-      <Line data={this.state.line} />
+      <Line data={this.props.lineData} />
       </Container>
     )
   }
