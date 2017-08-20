@@ -8,7 +8,6 @@ function displayLineMembers(users){
 }
 
 const Line = (props) => {
-  console.log(props)
   return(
     <Segment>
       <PageHeader title={props.data.line.name}/>
@@ -20,13 +19,3 @@ const Line = (props) => {
 }
 
 export default Line;
-
-
-
-
-
-// <ol>
-//   {props.line.users.map( user => {
-//     return <UserInLine user={user} />
-//   })}
-// </ol>

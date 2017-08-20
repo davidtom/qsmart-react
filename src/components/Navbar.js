@@ -8,7 +8,11 @@ class NavBar extends React.Component{
   render(){
     return(
       <Segment padded clearing>
-        < JoinLine />
+        < JoinLine
+          updateCode={this.props.updateCode}
+          joinLineData={this.props.joinLineData}
+          joinLine={this.props.joinLine}
+        />
         < UserNav />
       </Segment>
     )
