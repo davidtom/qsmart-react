@@ -10,7 +10,7 @@ const UserInLine = (data) => {
   let profile_image_url = data.user[1]
   return(
     <Segment padded textAlign="left">
-      <Image size="small" src={handleProfileImage(profile_image_url)} alt="Profile Image"/>
+      <Image size="mini" src={handleProfileImage(profile_image_url)} alt="Profile Image"/>
       <p>{username}</p>
     </Segment>
   )
