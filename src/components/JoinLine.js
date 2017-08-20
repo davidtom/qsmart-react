@@ -13,7 +13,7 @@ class JoinLine extends React.Component{
       <Container className="nav">
         <Input size="huge" label="Line Code:" placeholder="Enter code..." onChange={this.handleCodeChange}/>
         <Button positive size="huge" onClick={this.props.joinLine}>Join line!</Button>
-        {this.props.joinLineData.error && <Message negative>Invalid Line Code</Message>}
+        {this.props.joinLineData.error && <Message negative>{this.props.joinLineData.error}</Message>}
       </Container>
     )
   }

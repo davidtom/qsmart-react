@@ -41,7 +41,7 @@ class App extends React.Component {
       headers: {
         "content-type": "application/json",
         "accept": "application/json",
-        "Authorization": "1"
+        "Authorization": "4"
       },
       body: JSON.stringify({code: this.state.joinLine.code})
     }
@@ -80,11 +80,25 @@ class App extends React.Component {
       this.setState({
         joinLine: {
         ...this.state.joinLine,
-        error: true
+        error: "Invalid Line Code"
+        }
+      })
+    } else if (resp.status === 422){
+      resp.json().then(json => console.log(json))
+      this.setState({
+        joinLine: {
+        ...this.state.joinLine,
+        error: "You are already waiting in that line!"
         }
       })
     }
   }
+
+  // TODO: when a user is already in a line:
+          // API should not only send back a 422 error, but also the line_id
+          // App.js should redirect to that line's page (same code as get request)
+          // error message (already set up), should still display
+  // TODO: Once the above works how we want it, we desperately need to refactor to DRY it up
 
   getLineData = () => {
     let lineId = this.state.joinLine.lineId
