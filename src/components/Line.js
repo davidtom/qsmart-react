@@ -1,18 +1,31 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react'
+import {PageHeader} from "./PageAssets";
+import UserInLine from "./UserInLine"
+import { Segment } from 'semantic-ui-react'
+
+function displayLineMembers(users){
+  return users.map(user => <UserInLine user={user}/>)
+}
 
 const Line = (props) => {
+  console.log(props)
   return(
-    <Container>
-      <h2>{props.line.name}</h2>
-      <img src={props.line.image_url} />
-      <ol>
-        {props.line.users.map( user => {
-          return <UserInLine user={user} />
-        })}
-      </ol>
-    </Container>
+    <Segment>
+      <PageHeader title={props.data.line.name}/>
+      <img src={props.data.line.image_url} />
+        {displayLineMembers(props.data.users)}
+    </Segment>
   )
 }
 
 export default Line;
+
+
+
+
+
+// <ol>
+//   {props.line.users.map( user => {
+//     return <UserInLine user={user} />
+//   })}
+// </ol>

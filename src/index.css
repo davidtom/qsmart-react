@@ -8,6 +8,10 @@ div.nav {
   float: left;
 }
 
+div.user-in-line-container {
+  float: left;
+}
+
 #page-header {
   font-size: 3rem;
 }
