@@ -12,6 +12,7 @@ const Line = (props) => {
   return(
     <Segment>
       <PageHeader title={props.data.line.name}/>
+      <b><p>Code: {props.data.line.code}</p></b>
       <img src={props.data.line.image_url} />
         {displayLineMembers(props.data.users)}
     </Segment>
