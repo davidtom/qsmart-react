@@ -36,7 +36,13 @@ class JoinLine extends React.Component{
         error: false
       })
       resp.json()
-      .then(json => this.setState({lineId: json.line_id}))
+      .then(json => this.setState({
+        lineId: json.line_id}
+        , //NOTE: reset LineID so that if another line is joined the URL updates
+          function(){
+            this.setState({lineId:null})
+          }
+      ))
     } else if (resp.status === 404){
       this.setState({
         error: true

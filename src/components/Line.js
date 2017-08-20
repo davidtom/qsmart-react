@@ -8,12 +8,11 @@ function displayLineMembers(users){
 }
 
 const Line = (props) => {
-  console.log(props)
   return(
     <Segment>
       <PageHeader title={props.data.line.name}/>
       <b><p>Code: {props.data.line.code}</p></b>
-      <img src={props.data.line.image_url} />
+      <img src={props.data.line.image_url} alt="Line"/>
         {displayLineMembers(props.data.users)}
     </Segment>
   )
