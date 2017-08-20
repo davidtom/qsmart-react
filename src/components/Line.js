@@ -4,7 +4,7 @@ import UserInLine from "./UserInLine"
 import { Segment } from 'semantic-ui-react'
 
 function displayLineMembers(users){
-  return users.map(user => <UserInLine user={user}/>)
+  return users.map((user, index) => <UserInLine user={user} key={index}/>)
 }
 
 const Line = (props) => {
