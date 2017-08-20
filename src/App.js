@@ -6,6 +6,9 @@ import {APIURL} from "./components/PageAssets"
 import NavBar from './components/NavBar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
+import Auth from './services/AuthAdapter'
+import Login from './components/Login'
+import SignUp from './components/SignUp'
 
 
 class App extends React.Component {
@@ -13,6 +16,8 @@ class App extends React.Component {
     super()
 
     this.state = {
+      isLoggedIn: false,
+      user: '',
       joinLine: {
         code: "",
         error: false,
@@ -25,6 +30,40 @@ class App extends React.Component {
       }
     }
   }
+
+  logIn=(loginParams)=>{
+    Auth.login(loginParams)
+      .then( user => {
+        if (!user.error) {
+          this.setState({
+            isLoggedIn: true
+          })
+          localStorage.setItem('jwt', user.jwt )
+        }
+      })
+  }
+
+  logout(){
+    localStorage.removeItem('jwt')
+    this.setState({ auth: { isLoggedIn: false, user:{}}})
+  }
+
+  componentWillMount(){
+      if (localStorage.getItem('jwt')) {
+       Auth.currentUser()
+         .then(user => {
+           if (!user.error) {
+             console.log("fetch user");
+             this.setState({
+               auth: {
+                 isLoggedIn: true,
+                 user: user
+               }
+             })
+           }
+         })
+     }
+   }
 
   updateJoinLineCode = (code) => {
     this.setState({
@@ -108,6 +147,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.isLoggedIn)
     return (
       <div>
         < Route path="/" render={(props)=>(
@@ -124,6 +164,13 @@ class App extends React.Component {
               lineData={this.state.line}
             />
           )} />
+
+        < Route exact path='/signup' component={SignUp} />
+        < Route exact path ='/' render={(props)=>(
+          < Login
+            login={this.logIn}
+          />
+        )} />
 
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 
