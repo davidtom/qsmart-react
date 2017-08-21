@@ -11,6 +11,7 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
+import ProfilePage from './components/ProfilePage'
 
 
 class App extends React.Component {
@@ -131,7 +132,14 @@ class App extends React.Component {
         redirect: false
         }
       }))
-    } else if (resp.status === 404){
+    } else if (resp.status === 401){
+      this.setState({
+        joinLine: {
+        ...this.state.joinLine,
+        error: "Please Log In To Join A Line!"
+        }
+      })
+    }  else if (resp.status === 404){
       this.setState({
         joinLine: {
         ...this.state.joinLine,
@@ -194,9 +202,10 @@ class App extends React.Component {
             />
           )} />
 
+
         < Route exact path='/signup' component={SignUp} />
         < Route exact path ='/' render={(props)=>(
-          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage userId={this.state.auth.user.id}/>
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
         )} />
 
 
