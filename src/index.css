@@ -9,7 +9,25 @@ div.nav {
 }
 
 div.user-in-line-container {
+  vertical-align: middle;
+}
+
+div.position-in-line {
   float: left;
+  text-align: left;
+  width: 5%;
+}
+
+img.user-in-line {
+  float: left;
+}
+
+p.user-in-line {
+  margin-left: 5em;
+}
+
+a.remove-user-in-line {
+  float: right;
 }
 
 #page-header {
