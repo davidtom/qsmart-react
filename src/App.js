@@ -16,8 +16,10 @@ class App extends React.Component {
     super()
 
     this.state = {
-      isLoggedIn: false,
-      user: '',
+      auth: {
+        isLoggedIn: false,
+        user: ''
+      },
       joinLine: {
         code: "",
         error: false,
@@ -146,8 +148,17 @@ class App extends React.Component {
     .then(json => this.setState({line: json}))
   }
 
+  requireAuth(component){
+      console.log(this.state.auth)
+      if (!this.state.auth.isLoggedIn){
+        return(<Redirect to='/'/>)
+      } else {
+        return(component)
+      }
+  }
+
   render() {
-    console.log(this.state.isLoggedIn)
+    console.log(this.state.auth.isLoggedIn)
     return (
       <div>
         < Route path="/" render={(props)=>(
@@ -159,10 +170,11 @@ class App extends React.Component {
           )} />
 
         < Route path = "/lines/:id" render={(props)=>(
-            < LineShowPage {...props}
+            this.requireAuth(< LineShowPage
+              {...props}
               getLineData={this.getLineData}
               lineData={this.state.line}
-            />
+            />)
           )} />
 
         < Route exact path='/signup' component={SignUp} />

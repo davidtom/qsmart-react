@@ -6,12 +6,13 @@ function handleProfileImage(url){
 }
 
 const UserInLine = (data) => {
-  let username = data.user[0]
-  let profile_image_url = data.user[1]
+  let firstName = data.user[0]
+  let lastName = data.user[1]
+  let profile_image_url = data.user[2]
   return(
     <Segment padded textAlign="left">
       <Image size="mini" src={handleProfileImage(profile_image_url)} alt="Profile Image"/>
-      <p>{username}</p>
+      <p>{firstName} {lastName}</p>
     </Segment>
   )
 }
