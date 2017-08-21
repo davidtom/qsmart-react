@@ -22,21 +22,24 @@ class LineWebSocket extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {}
+      users: []
     }
   }
 
   componentDidMount() {
     this.props.cableApp.line = this.props.cableApp.cable.subscriptions.create({channel: "LineChannel"}, {
-      received: (user) => {console.log(user)}
+      received: (data) => {
+        console.log(data);
+        // App.setState({
+        //   line:
+        // })
+      }
     })
   }
 
   render() {
     return(
-      <div>
-        <p>Some render</p>
-      </div>
+      <div />
     )
   }
 }
