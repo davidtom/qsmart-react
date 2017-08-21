@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Input, Button, Message } from 'semantic-ui-react'
+import { Container, Input, Button, Message, Form } from 'semantic-ui-react'
 
 class JoinLine extends React.Component{
 
@@ -10,11 +10,11 @@ class JoinLine extends React.Component{
 
   render(){
     return(
-      <Container className="nav">
+      <div>
         <Input size="huge" label="Line Code:" placeholder="Enter code..." onChange={this.handleCodeChange}/>
         <Button positive size="huge" onClick={this.props.joinLine}>Join line!</Button>
         {this.props.joinLineData.error && <Message negative>{this.props.joinLineData.error}</Message>}
-      </Container>
+      </div>
     )
   }
 }

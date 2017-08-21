@@ -1,20 +1,31 @@
 import React from 'react';
 import JoinLine from "./JoinLine"
 import UserNav from "./UserNav"
-import { Segment } from 'semantic-ui-react'
+import { Segment, Container, Grid } from 'semantic-ui-react'
 
 class NavBar extends React.Component{
 
   render(){
     return(
-      <Segment padded clearing>
-        < JoinLine
-          updateCode={this.props.updateCode}
-          joinLineData={this.props.joinLineData}
-          joinLine={this.props.joinLine}
-        />
-        < UserNav />
-      </Segment>
+
+      <Segment>
+      <Container>
+        <Grid>
+            <Grid.Column floated='left' width={10}>
+            < JoinLine
+              updateCode={this.props.updateCode}
+              joinLineData={this.props.joinLineData}
+              joinLine={this.props.joinLine}
+            />
+            </Grid.Column>
+            <Grid.Column>
+            {this.props.isLoggedIn ? < UserNav logout={this.props.logout} userId={this.props.userId}/> : <div></div>}
+            </Grid.Column>
+        </Grid>
+        </Container>
+        </Segment>
+
+
     )
   }
 
