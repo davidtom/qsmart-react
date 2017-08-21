@@ -3,12 +3,15 @@ import './App.css';
 import {Route} from "react-router-dom"
 import { Redirect } from 'react-router'
 import {APIURL} from "./components/PageAssets"
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
 import Auth from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+
+// Action Cable setup
+// import {ActionCable} from 'react-actioncable-provider';
 
 
 class App extends React.Component {
@@ -50,6 +53,17 @@ class App extends React.Component {
     this.setState({ auth: { isLoggedIn: false, user:{}}})
   }
 
+  subscribeToChannel = () => {
+    console.log(this.cable)
+    // this.line = this.cable.subscriptions.create("LineChannel", {
+    //   connected: function() {},
+    //   disconnected: function() {},
+    //   received: function(data) {
+    //     console.log(data)
+    //   }
+    // })
+  }
+
   componentWillMount(){
       if (localStorage.getItem('jwt')) {
        Auth.currentUser()
@@ -65,6 +79,7 @@ class App extends React.Component {
            }
          })
      }
+     this.subscribeToChannel()
    }
 
   updateJoinLineCode = (code) => {
