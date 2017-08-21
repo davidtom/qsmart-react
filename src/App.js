@@ -10,6 +10,7 @@ import Auth from './services/AuthAdapter'
 import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import UserShowPage from './components/UserShowPage'
 
 
 class App extends React.Component {
@@ -39,14 +40,30 @@ class App extends React.Component {
       .then( user => {
         if (!user.error) {
           this.setState({
-            isLoggedIn: true
+            auth:{
+              isLoggedIn: true,
+              user: user
+            }
           })
           localStorage.setItem('jwt', user.jwt )
         }
+      }).then(()=>{
+        Auth.currentUser()
+          .then(user => {
+            if (!user.error) {
+              console.log("fetch user");
+              this.setState({
+                auth: {
+                  isLoggedIn: true,
+                  user: user
+                }
+              })
+            }
+          })
       })
   }
 
-  logout(){
+  logout=()=>{
     localStorage.removeItem('jwt')
     this.setState({ auth: { isLoggedIn: false, user:{}}})
   }
@@ -163,6 +180,9 @@ class App extends React.Component {
               updateCode={this.updateJoinLineCode}
               joinLineData={this.state.joinLine}
               joinLine={this.joinLine}
+              logout={this.logout}
+              isLoggedIn={this.state.auth.isLoggedIn}
+              userId={this.state.auth.user.id}
             />
           )} />
 
@@ -176,10 +196,10 @@ class App extends React.Component {
 
         < Route exact path='/signup' component={SignUp} />
         < Route exact path ='/' render={(props)=>(
-          < Login
-            login={this.logIn}
-          />
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage />
         )} />
+
+
 
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 
