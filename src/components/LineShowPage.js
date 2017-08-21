@@ -3,6 +3,8 @@ import Line from "./Line"
 
 import { Container } from 'semantic-ui-react'
 
+import ActionCable from '../../node_modules/actioncable/lib/assets/compiled/action_cable.js'
+
 class LineShowPage extends React.Component {
 
   componentWillMount(){
