@@ -24,3 +24,5 @@ function headers () {
     'Authorization': localStorage.getItem('jwt')
   }
 }
+
+export {headers}
