@@ -7,11 +7,14 @@ import NavBar from './components/Navbar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
 import Auth from './services/AuthAdapter'
+import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import UserShowPage from './components/UserShowPage'
+import WS from 'ws'
+import { ActionCableProvider, ActionCable } from 'react-actioncable-provider'
 
-// Action Cable setup
-// import {ActionCable} from 'react-actioncable-provider';
+const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 
 class App extends React.Component {
@@ -36,32 +39,45 @@ class App extends React.Component {
     }
   }
 
+  subscribeToChannel = () => {
+    console.log('Web socket GO!')
+    let wsc = new WS('ws://localhost:3000/')
+    wsc.onDataReceived = (data) => {
+      console.log(data)
+    }
+  }
+
   logIn=(loginParams)=>{
     Auth.login(loginParams)
       .then( user => {
         if (!user.error) {
           this.setState({
-            isLoggedIn: true
+            auth:{
+              isLoggedIn: true,
+              user: user
+            }
           })
           localStorage.setItem('jwt', user.jwt )
         }
+      }).then(()=>{
+        Auth.currentUser()
+          .then(user => {
+            if (!user.error) {
+              console.log("fetch user");
+              this.setState({
+                auth: {
+                  isLoggedIn: true,
+                  user: user
+                }
+              })
+            }
+          })
       })
   }
 
-  logout(){
+  logout=()=>{
     localStorage.removeItem('jwt')
     this.setState({ auth: { isLoggedIn: false, user:{}}})
-  }
-
-  subscribeToChannel = () => {
-    console.log(this.cable)
-    // this.line = this.cable.subscriptions.create("LineChannel", {
-    //   connected: function() {},
-    //   disconnected: function() {},
-    //   received: function(data) {
-    //     console.log(data)
-    //   }
-    // })
   }
 
   componentWillMount(){
@@ -69,7 +85,7 @@ class App extends React.Component {
        Auth.currentUser()
          .then(user => {
            if (!user.error) {
-             console.log("fetch user");
+            //  console.log("fetch user");
              this.setState({
                auth: {
                  isLoggedIn: true,
@@ -94,11 +110,7 @@ class App extends React.Component {
   joinLine = () => {
     let options = {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "accept": "application/json",
-        "Authorization": "4"
-      },
+      headers: headers(),
       body: JSON.stringify({code: this.state.joinLine.code})
     }
     fetch(`${APIURL()}/lines_users`, options)
@@ -156,15 +168,15 @@ class App extends React.Component {
           // error message (already set up), should still display
   // TODO: Once the above works how we want it, we desperately need to refactor to DRY it up
 
-  getLineData = () => {
-    let lineId = this.state.joinLine.lineId
+  getLineData = (id) => {
+    let lineId = id || this.state.joinLine.lineId
     fetch(`${APIURL()}/lines/${lineId}`)
     .then(resp => resp.json())
     .then(json => this.setState({line: json}))
   }
 
   requireAuth(component){
-      console.log(this.state.auth)
+      // console.log(this.state.auth)
       if (!this.state.auth.isLoggedIn){
         return(<Redirect to='/'/>)
       } else {
@@ -173,35 +185,40 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.auth.isLoggedIn)
+    // console.log(this.state.auth.isLoggedIn)
     return (
       <div>
+        <ActionCableProvider cable={cable}>
         < Route path="/" render={(props)=>(
             < NavBar {...props}
               updateCode={this.updateJoinLineCode}
               joinLineData={this.state.joinLine}
               joinLine={this.joinLine}
+              logout={this.logout}
+              isLoggedIn={this.state.auth.isLoggedIn}
+              userId={this.state.auth.user.id}
             />
           )} />
 
         < Route path = "/lines/:id" render={(props)=>(
-            this.requireAuth(< LineShowPage
+            < LineShowPage
               {...props}
               getLineData={this.getLineData}
               lineData={this.state.line}
-            />)
+            />
           )} />
 
         < Route exact path='/signup' component={SignUp} />
         < Route exact path ='/' render={(props)=>(
-          < Login
-            login={this.logIn}
-          />
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage userId={this.state.auth.user.id}/>
         )} />
+
+
 
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 
       < SiteFooter />
+      </ActionCableProvider>
       </div>
     )
   }
