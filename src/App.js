@@ -12,10 +12,34 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
 import WS from 'ws'
-import { ActionCableProvider, ActionCable } from 'react-actioncable-provider'
+import ActionCableProvider from 'react-actioncable-provider'
+import actionCable from 'actioncable'
 
-const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+// const cableApp = {}
+// cableApp.cable = actionCable.createConsumer(`ws://${window.location.hostname}:3000/line`)
 
+class LineWebSocket extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: {}
+    }
+  }
+
+  componentDidMount() {
+    this.props.cableApp.line = this.props.cableApp.cable.subscriptions.create({channel: "LineChannel"}, {
+      received: (user) => {console.log(user)}
+    })
+  }
+
+  render() {
+    return(
+      <div>
+        <p>Some render</p>
+      </div>
+    )
+  }
+}
 
 class App extends React.Component {
   constructor(){
@@ -41,8 +65,8 @@ class App extends React.Component {
 
   subscribeToChannel = () => {
     console.log('Web socket GO!')
-    let wsc = new WS('ws://localhost:3000/')
-    wsc.onDataReceived = (data) => {
+    let webSocket = actionCable.createConsumer(`ws://${window.location.hostname}:3000/line`)
+    webSocket.onDataReceived = (data) => {
       console.log(data)
     }
   }
@@ -95,7 +119,6 @@ class App extends React.Component {
            }
          })
      }
-     this.subscribeToChannel()
    }
 
   updateJoinLineCode = (code) => {
@@ -187,8 +210,8 @@ class App extends React.Component {
   render() {
     // console.log(this.state.auth.isLoggedIn)
     return (
-      <div>
-        <ActionCableProvider cable={cable}>
+      <div className="app">
+        <LineWebSocket cableApp={this.props.cableApp} />
         < Route path="/" render={(props)=>(
             < NavBar {...props}
               updateCode={this.updateJoinLineCode}
@@ -218,8 +241,7 @@ class App extends React.Component {
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 
       < SiteFooter />
-      </ActionCableProvider>
-      </div>
+    </div>
     )
   }
 }

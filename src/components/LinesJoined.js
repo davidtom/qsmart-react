@@ -3,18 +3,12 @@ import {Card} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import LineJoined from './LineJoined'
 import {headers} from '../services/AuthAdapter'
-<<<<<<< HEAD
 
-=======
->>>>>>> WIP
 class LinesJoined extends React.Component{
   state = {
     lines: []
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> WIP
   componentDidMount(){
     fetch(`${APIURL()}/users/${this.props.userId}/lines`,{headers:headers()})
     .then(resp=>resp.json())
@@ -24,10 +18,7 @@ class LinesJoined extends React.Component{
       })
     })
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> WIP
   render(){
     console.log(this.state)
     return(
@@ -37,8 +28,5 @@ class LinesJoined extends React.Component{
     )
   }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> WIP
 export default LinesJoined
