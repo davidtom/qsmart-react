@@ -11,9 +11,10 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
+import WS from 'ws'
+import { ActionCableProvider, ActionCable } from 'react-actioncable-provider'
 
-// Action Cable setup
-// import {ActionCable} from 'react-actioncable-provider';
+const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 
 class App extends React.Component {
@@ -35,6 +36,14 @@ class App extends React.Component {
         line: {},
         users: []
       }
+    }
+  }
+
+  subscribeToChannel = () => {
+    console.log('Web socket GO!')
+    let wsc = new WS('ws://localhost:3000/')
+    wsc.onDataReceived = (data) => {
+      console.log(data)
     }
   }
 
@@ -69,17 +78,6 @@ class App extends React.Component {
   logout=()=>{
     localStorage.removeItem('jwt')
     this.setState({ auth: { isLoggedIn: false, user:{}}})
-  }
-
-  subscribeToChannel = () => {
-    console.log(this.cable)
-    // this.line = this.cable.subscriptions.create("LineChannel", {
-    //   connected: function() {},
-    //   disconnected: function() {},
-    //   received: function(data) {
-    //     console.log(data)
-    //   }
-    // })
   }
 
   componentWillMount(){
@@ -190,6 +188,7 @@ class App extends React.Component {
     // console.log(this.state.auth.isLoggedIn)
     return (
       <div>
+        <ActionCableProvider cable={cable}>
         < Route path="/" render={(props)=>(
             < NavBar {...props}
               updateCode={this.updateJoinLineCode}
@@ -219,6 +218,7 @@ class App extends React.Component {
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 
       < SiteFooter />
+      </ActionCableProvider>
       </div>
     )
   }
