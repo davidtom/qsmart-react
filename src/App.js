@@ -11,8 +11,6 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
-import WS from 'ws'
-import ActionCableProvider from 'react-actioncable-provider'
 import actionCable from 'actioncable'
 
 // const cableApp = {}
