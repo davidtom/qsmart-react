@@ -20,7 +20,7 @@ class UserNav extends React.Component{
     return(
 
       <Button.Group floated='right'>
-        <Button positive onClick={this.onProfileClick}> Home </Button>
+        <Button as="a" href={"/"} positive onClick={this.onProfileClick}> Home </Button>
         <Button.Or />
         <Button onClick={this.props.logout}>Logout</Button>
         {this.state.clicked ? <Redirect to='/'/> : null}
