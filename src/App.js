@@ -15,7 +15,6 @@ import ProfilePage from './components/ProfilePage'
 
 
 class App extends React.Component {
-  // props.cableApp
   constructor(props){
     super(props)
 
@@ -85,7 +84,6 @@ class App extends React.Component {
        Auth.currentUser()
          .then(user => {
            if (!user.error) {
-            //  console.log("fetch user");
              this.setState({
                auth: {
                  isLoggedIn: true,
@@ -177,7 +175,6 @@ class App extends React.Component {
   }
 
   requireAuth(component){
-      // console.log(this.state.auth)
       if (!this.state.auth.isLoggedIn){
         return(<Redirect to='/'/>)
       } else {
@@ -186,7 +183,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log("render",this.state.auth.user)
     return (
       <div>
         < Route path="/" render={(props)=>(
