@@ -3,7 +3,7 @@ import './App.css';
 import {Route} from "react-router-dom"
 import { Redirect } from 'react-router'
 import {APIURL} from "./components/PageAssets"
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
 import Auth from './services/AuthAdapter'
@@ -35,6 +35,11 @@ class App extends React.Component {
         users: []
       }
     }
+  }
+
+  // I'll eat my socks if this works
+  cableAppPass = () => {
+    return this.props.cableApp
   }
 
   // Callback function to setState in App from Line ActionCable
@@ -235,7 +240,7 @@ class App extends React.Component {
           !this.state.auth.isLoggedIn ? <SignUp {...props} login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
         )} />
         < Route exact path ='/' render={(props)=>(
-          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user} data-cableApp={this.props.cableApp} />
         )} />
 
 

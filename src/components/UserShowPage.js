@@ -4,15 +4,17 @@ import LinesJoined from './LinesJoined'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 import ProfilePage from './ProfilePage'
+import UserWebSocket from './UserWebSocket'
 
-const panes = (props) => {
+const panes = (props, cableApp) => {
   const userId = props.user.id
   const lines = props.lines
   const createdLines = props.createdLines
+  const cableAppProp = props['data-cableApp']
   return(
     [
-      { menuItem: 'Lines Joined', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={lines} isCreated={false}/></Tab.Pane> },
-      { menuItem: 'Lines Created', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={createdLines} isCreated={true}/></Tab.Pane> }
+      { menuItem: 'Lines Joined', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={lines} isCreated={false} data-cableApp={cableAppProp} /></Tab.Pane> },
+      { menuItem: 'Lines Created', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={createdLines} isCreated={true} data-cableApp={cableAppProp} /></Tab.Pane> }
     ]
   )
 }
@@ -21,7 +23,16 @@ class UserShowPage extends React.Component{
   state = {
     user: this.props.user,
     lines: [],
-    createdLines: []
+    createdLines: [],
+    cableApp: this.props['data-cableApp']
+  }
+
+  updateUserShow = (data) => {
+    this.setState({
+      user: this.state.user,
+      lines: data.lines,
+      createdLines: data.createdLines
+    })
   }
 
   componentWillMount(){
@@ -45,9 +56,14 @@ class UserShowPage extends React.Component{
 
   }
 
+  componentDidMount() {
+    console.log(this.props['data-cableApp'])
+  }
+
   render(){
     return(
       <Container textAlign="center" className="Site">
+
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>
