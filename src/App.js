@@ -3,7 +3,7 @@ import './App.css';
 import {Route} from "react-router-dom"
 import { Redirect } from 'react-router'
 import {APIURL} from "./components/PageAssets"
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
 import Auth from './services/AuthAdapter'
@@ -15,8 +15,9 @@ import ProfilePage from './components/ProfilePage'
 
 
 class App extends React.Component {
-  constructor(){
-    super()
+  // props.cableApp
+  constructor(props){
+    super(props)
 
     this.state = {
       auth: {
@@ -34,6 +35,16 @@ class App extends React.Component {
         users: []
       }
     }
+  }
+
+  // Callback function to setState in App from Line ActionCable
+  updateAppStateLine = (newUsers) => {
+    this.setState({
+      line: {
+        ...this.state.line,
+        users: newUsers
+      }
+    })
   }
 
   logIn=(loginParams)=>{
@@ -103,6 +114,7 @@ class App extends React.Component {
     }
     fetch(`${APIURL()}/lines_users`, options)
       .then(this.handleResponse)
+    this.props.cableApp.line.send({code: this.state.joinLine.code})
   }
 
   handleResponse = (resp) => {
@@ -207,6 +219,10 @@ class App extends React.Component {
         < Route path = "/lines/:id" render={(props)=>(
             < LineShowPage
               {...props}
+              data-cableApp={this.props.cableApp}
+              data-updateApp={this.updateAppStateLine}
+              data-lineData={this.state.lineData}
+              data-getLineData={this.getLineData}
               getLineData={this.getLineData}
               lineData={this.state.line}
               authData={this.state.auth}
