@@ -27,18 +27,18 @@ class LineJoined extends  React.Component{
             {this.props.line.name}
           </Card.Header>
           <Card.Meta>
+            Code: {this.props.line.code}
+          </Card.Meta>
+          <Card.Description>
             <span className='date'>
               Joined @ {newTime}
             </span>
-          </Card.Meta>
-          <Card.Description>
-            {this.props.line.code}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
           <a>
-            <Icon name='user' />
-            22 Friends
+            <Icon name='users' />
+            {this.props.isCreated ? `Total in Line: ${this.props.line.userCount}` : `Position: ${this.props.line.userPlace}/${this.props.line.userCount}` }
           </a>
         </Card.Content>
         {this.state.clicked ? <Redirect to={`/lines/${this.state.listId}`}/> : null}
