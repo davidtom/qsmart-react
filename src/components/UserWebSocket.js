@@ -11,7 +11,7 @@ class UserWebSocket extends React.Component {
     console.log(this.props['data-user'])
     this.props['data-cableApp'].user = this.props['data-cableApp'].cable.subscriptions.create({channel: "UserChannel", room: this.props['data-user'].id}, {
       received: (data) => {
-        this.props['data-updateUserShow'](data)
+        this.props['data-updateUserShowLines'](data)
       }
     })
   }
