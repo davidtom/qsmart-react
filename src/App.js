@@ -114,7 +114,7 @@ class App extends React.Component {
     }
     fetch(`${APIURL()}/lines_users`, options)
       .then(this.handleResponse)
-    this.props.cableApp.line.send({code: this.state.joinLine.code})
+    // this.props.cableApp.line.send({code: this.state.joinLine.code})
   }
 
   handleResponse = (resp) => {
@@ -169,12 +169,6 @@ class App extends React.Component {
     }
   }
 
-  // TODO: when a user is already in a line:
-          // API should not only send back a 422 error, but also the line_id
-          // App.js should redirect to that line's page (same code as get request)
-          // error message (already set up), should still display
-  // TODO: Once the above works how we want it, we desperately need to refactor to DRY it up
-
   getLineData = (id) => {
     let lineId = id || this.state.joinLine.lineId
     fetch(`${APIURL()}/lines/${lineId}`)
@@ -189,16 +183,6 @@ class App extends React.Component {
       } else {
         return(component)
       }
-  }
-
-  removeUserFromLine = (userId, lineId) => {
-    let options = {
-      method: "DELETE",
-      headers: headers()
-    }
-    fetch(`${APIURL()}/lines_users/data?user=${userId}&line=${lineId}`, options)
-    .then(this.getLineData(lineId))
-    // NOTE: it looks like the get request is happening before the delete request!?!
   }
 
   render() {
@@ -226,17 +210,19 @@ class App extends React.Component {
               getLineData={this.getLineData}
               lineData={this.state.line}
               authData={this.state.auth}
-              removeUserFromLine={this.removeUserFromLine}
             />
           )} />
 
 
-        < Route exact path='/signup' component={SignUp} />
+        < Route exact path='/signup' render={(props) => (
+            < SignUp
+              {...props}
+              logIn={this.logIn}
+            />
+          )} />
         < Route exact path ='/' render={(props)=>(
           !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
         )} />
-
-
 
         {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
 

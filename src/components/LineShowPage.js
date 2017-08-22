@@ -23,7 +23,7 @@ class LineShowPage extends React.Component {
         data-getLineData={this.props['data-getLineData']}/>
         <Line lineData={this.props.lineData}
             authData={this.props.authData}
-            removeUserFromLine={this.props.removeUserFromLine}/>
+            />
       </Container>
     )
   }

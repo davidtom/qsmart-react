@@ -13,13 +13,12 @@ const Line = (props) => {
                 authData={props.authData}
                 lineData={props.lineData}
                 position={index+1}
-                removeUserFromLine={props.removeUserFromLine}
                 key={index}/>)
   }
 
   return(
     <Segment>
-      <img className="line-image" src={props.lineData.line.image_url} alt="Line"/>
+      <img className="line-image" src={props.lineData.line.image_url} alt="QSmart Line"/>
       <PageHeader title={props.lineData.line.name}/>
       <SectionHeader title={`Code: ${props.lineData.line.code}`}/>
         {displayLineMembers()}
