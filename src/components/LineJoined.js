@@ -15,10 +15,16 @@ class LineJoined extends  React.Component{
     }
   }
 
+  componentDidMount() {
+    console.log(this.props.userId)
+  }
+
   updateLineJoined = (newUsers) => {
     console.log(newUsers)
+    const userId = this.props.userId
     this.setState({
-      userCount: newUsers.length
+      userCount: newUsers.length,
+      userPlace: newUsers.findIndex( (user) => { return user.id === userId }) + 1
     })
   }
 
