@@ -21,8 +21,12 @@ const CreateListCard = (props) =>{
 }
 
 class LinesJoined extends React.Component{
-  state = {
-    name: ''
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name: ''
+    }
   }
 
   onChange = (event) => {
@@ -43,7 +47,7 @@ class LinesJoined extends React.Component{
     return(
       <Card.Group>
         {this.props.isCreated ? <CreateListCard createList={this.createList} onChange={this.onChange}/> : null}
-        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index}/>)}
+        {this.props.lines.map(line=><LineJoined line={line} isCreated={this.props.isCreated} data-cableApp={this.props['data-cableApp']} />)}
       </Card.Group>
     )
   }
