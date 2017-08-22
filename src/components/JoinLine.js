@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Input, Button, Message, Form } from 'semantic-ui-react'
+import { Input, Button, Message } from 'semantic-ui-react'
 
 class JoinLine extends React.Component{
 

@@ -8,7 +8,7 @@ const APIURL = () => (
 )
 
 const SiteLogo = () => (
-  <Image shape='rounded' inline spaced src={logo} alt="QSmart"/>
+  <Image shape='rounded' size="huge" inline spaced src={logo} alt="QSmart"/>
 )
 
 const SiteHeader = () => (

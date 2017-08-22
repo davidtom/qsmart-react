@@ -50,10 +50,10 @@ class UserShowPage extends React.Component{
       <Container textAlign="center" className="Site">
       <Grid>
         <Grid.Row>
-          <Grid.Column width={2}>
+          <Grid.Column width={5}>
             <ProfilePage user={this.props.user}/>
           </Grid.Column>
-          <Grid.Column width={14}>
+          <Grid.Column width={10}>
             <Tab panes={panes({...this.state})}/>
           </Grid.Column>
         </Grid.Row>

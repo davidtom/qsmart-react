@@ -4,7 +4,6 @@ import { Card } from 'semantic-ui-react'
 class ProfilePage extends React.Component{
 
   render(){
-    console.log(this.props)
     return(
       <Card
         image={this.props.user.profile_image_url}

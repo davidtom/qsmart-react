@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Icon, Input} from 'semantic-ui-react'
+import {Card, Icon, Input, Button} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import LineJoined from './LineJoined'
 import {headers} from '../services/AuthAdapter'
@@ -8,12 +8,13 @@ import {headers} from '../services/AuthAdapter'
 const CreateListCard = (props) =>{
   return(
     <Card>
-      <Card.Header>
-        Create A List
+      <Icon name='add square' size='huge' onClick={props.createList}/>
+      <Card.Header className="create-list-header">
+        Create a List:
       </Card.Header>
       <Card.Description>
         <Input name='name' placeholder='Line Name' onChange={props.onChange} />
-        <Icon name='add square' size='huge' onClick={props.createList}/>
+        <Button name='add square' size='large' color="green" onClick={props.createList}>Create</Button>
       </Card.Description>
     </Card>
   )
@@ -42,7 +43,7 @@ class LinesJoined extends React.Component{
     return(
       <Card.Group>
         {this.props.isCreated ? <CreateListCard createList={this.createList} onChange={this.onChange}/> : null}
-        {this.props.lines.map(line=><LineJoined line={line} isCreated={this.props.isCreated}/>)}
+        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index}/>)}
       </Card.Group>
     )
   }

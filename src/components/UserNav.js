@@ -1,8 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-// import JoinLine from "./JoinLine"
-import { Container, Button } from 'semantic-ui-react'
-import ProfilePage from './ProfilePage'
+import { Button } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 
 class UserNav extends React.Component{

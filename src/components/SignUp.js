@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import { Container, Form, Input, Button, Message} from 'semantic-ui-react'
+import { Container, Form, Button, Message} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 
 class SignUp extends React.Component{

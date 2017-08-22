@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-import { Redirect } from 'react-router'
 
 class LoginSignUp extends React.Component{
 

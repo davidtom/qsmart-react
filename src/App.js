@@ -11,7 +11,7 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
-import ProfilePage from './components/ProfilePage'
+
 
 
 class App extends React.Component {
