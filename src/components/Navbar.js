@@ -1,6 +1,7 @@
 import React from 'react';
 import JoinLine from "./JoinLine"
 import UserNav from "./UserNav"
+import LoginSignUp from './LoginSignUp'
 import { Segment, Container, Grid } from 'semantic-ui-react'
 
 class NavBar extends React.Component{
@@ -19,7 +20,7 @@ class NavBar extends React.Component{
             />
             </Grid.Column>
             <Grid.Column>
-            {this.props.isLoggedIn ? < UserNav logout={this.props.logout} userId={this.props.userId}/> : <div></div>}
+            {this.props.isLoggedIn ? < UserNav logout={this.props.logout} userId={this.props.userId}/> : <LoginSignUp />}
             </Grid.Column>
         </Grid>
         </Container>
