@@ -58,7 +58,7 @@ class LinesJoined extends React.Component{
     return(
       <Card.Group>
         {this.props.isCreated ? <CreateLineCard createLine={this.createLine} onChange={this.onChange}/> : null}
-        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index}/>)}
+        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index} data-cableApp={this.props['data-cableApp']} />)}
         {this.state.redirect && <Redirect to={`/lines/${this.state.lineId}`} />}
       </Card.Group>
     )

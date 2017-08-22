@@ -36,6 +36,11 @@ class App extends React.Component {
     }
   }
 
+  // I'll eat my socks if this works
+  cableAppPass = () => {
+    return this.props.cableApp
+  }
+
   // Callback function to setState in App from Line ActionCable
   updateAppStateLine = (newUsers) => {
     this.setState({
@@ -230,7 +235,7 @@ class App extends React.Component {
             />
           )} />
         < Route exact path ='/' render={(props)=>(
-          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user} data-cableApp={this.props.cableApp} />
         )} />
 
         {this.state.joinLine.redirect ? <Redirect to={`/lines/${this.state.joinLine.lineId}`} /> : null}

@@ -1,11 +1,25 @@
 import React from 'react'
 import {Card, Image, Icon} from 'semantic-ui-react'
 import { Redirect } from 'react-router'
+import LineJoinedWebSocket from './LineJoinedWebSocket'
 
 class LineJoined extends  React.Component{
-  state = {
-   clicked: false,
-   listId: ''
+  constructor(props) {
+    super(props)
+
+    this.state = {
+     clicked: false,
+     listId: '',
+     userCount: this.props.line.userCount,
+     userPlace: this.props.line.userPlace
+    }
+  }
+
+  updateLineJoined = (newUsers) => {
+    console.log(newUsers)
+    this.setState({
+      userCount: newUsers.length
+    })
   }
 
   onCardClick = (event) => {
@@ -21,6 +35,7 @@ class LineJoined extends  React.Component{
     const newTime = time.toTimeString()
     return(
       <Card onClick={this.onCardClick} name={`${this.props.line.id}`}>
+        <LineJoinedWebSocket data-cableApp={this.props['data-cableApp']} data-updateLineJoined={this.updateLineJoined} data-line={this.props.line} />
         <Image size="small" centered src={this.props.line.image_url} />
         <Card.Content>
           <Card.Header>
@@ -38,7 +53,7 @@ class LineJoined extends  React.Component{
         <Card.Content extra>
           <a>
             <Icon name='users' />
-            {this.props.isCreated ? `Total in Line: ${this.props.line.userCount}` : `Position: ${this.props.line.userPlace}/${this.props.line.userCount}` }
+            {this.props.isCreated ? `Total in Line: ${this.state.userCount}` : `Position: ${this.state.userPlace}/${this.state.userCount}` }
           </a>
         </Card.Content>
         {this.state.clicked ? <Redirect to={`/lines/${this.state.listId}`}/> : null}
