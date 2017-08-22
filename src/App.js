@@ -216,8 +216,7 @@ class App extends React.Component {
             />
           )} />
 
-          // Pass in cableApp prop from App
-          // Pass in updateAppStateLine callback as updateApp
+          // Pass in props as data-attributes
         < Route path = "/lines/:id" render={(props)=>(
             < LineShowPage
               {...props}

@@ -8,7 +8,7 @@ class LineShowPage extends React.Component {
 
   componentDidMount(){
     // if (!this.props.lineData.line.size) {
-      this.props.getLineData(window.location.href.match(/\d$/)[0])
+      this.props.getLineData(window.location.href.match(/\d+$/)[0])
       console.log(this.props.lineData)
       console.log(this.props['data-lineData'])
       console.log(this.props['data-getLineData'])
