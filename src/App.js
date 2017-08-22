@@ -11,19 +11,9 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
-<<<<<<< HEAD
 import ProfilePage from './components/ProfilePage'
 import actionCable from 'actioncable'
-=======
-import WS from 'ws'
-import { ActionCableProvider, ActionCable } from 'react-actioncable-provider'
-
-const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
->>>>>>> 84a5e8f2dc2ee99b5127a15516ce650d0cc4b1f1
-
-// const cableApp = {}
-// cableApp.cable = actionCable.createConsumer(`ws://${window.location.hostname}:3000/line`)
-
+import LineWebSocket from './components/LineWebSocket'
 
 class App extends React.Component {
   constructor(){
@@ -96,7 +86,6 @@ class App extends React.Component {
            }
          })
      }
-     this.subscribeToChannel()
    }
 
   updateJoinLineCode = (code) => {
