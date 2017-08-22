@@ -11,6 +11,7 @@ class LineShowPage extends React.Component {
       this.props.getLineData(window.location.href.match(/\d$/)[0])
       console.log(this.props.lineData)
       console.log(this.props['data-lineData'])
+      console.log(this.props['data-getLineData'])
     // }
   }
 

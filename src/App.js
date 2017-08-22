@@ -114,6 +114,7 @@ class App extends React.Component {
     }
     fetch(`${APIURL()}/lines_users`, options)
       .then(this.handleResponse)
+    this.props.cableApp.line.send({code: this.state.joinLine.code})
   }
 
   handleResponse = (resp) => {
