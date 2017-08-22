@@ -11,37 +11,19 @@ import {headers} from './services/AuthAdapter'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import UserShowPage from './components/UserShowPage'
+<<<<<<< HEAD
 import ProfilePage from './components/ProfilePage'
 import actionCable from 'actioncable'
+=======
+import WS from 'ws'
+import { ActionCableProvider, ActionCable } from 'react-actioncable-provider'
+
+const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
+>>>>>>> 84a5e8f2dc2ee99b5127a15516ce650d0cc4b1f1
 
 // const cableApp = {}
 // cableApp.cable = actionCable.createConsumer(`ws://${window.location.hostname}:3000/line`)
 
-class LineWebSocket extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: []
-    }
-  }
-
-  componentDidMount() {
-    this.props.cableApp.line = this.props.cableApp.cable.subscriptions.create({channel: "LineChannel"}, {
-      received: (data) => {
-        console.log(data);
-        // App.setState({
-        //   line:
-        // })
-      }
-    })
-  }
-
-  render() {
-    return(
-      <div />
-    )
-  }
-}
 
 class App extends React.Component {
   constructor(){
@@ -65,13 +47,6 @@ class App extends React.Component {
     }
   }
 
-  subscribeToChannel = () => {
-    console.log('Web socket GO!')
-    let webSocket = actionCable.createConsumer(`ws://${window.location.hostname}:3000/line`)
-    webSocket.onDataReceived = (data) => {
-      console.log(data)
-    }
-  }
 
   logIn=(loginParams)=>{
     Auth.login(loginParams)
@@ -121,6 +96,7 @@ class App extends React.Component {
            }
          })
      }
+     this.subscribeToChannel()
    }
 
   updateJoinLineCode = (code) => {
@@ -243,7 +219,7 @@ class App extends React.Component {
 
         < Route exact path='/signup' component={SignUp} />
         < Route exact path ='/' render={(props)=>(
-          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage userId={this.state.auth.user.id}/>
         )} />
 
 
