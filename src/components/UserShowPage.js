@@ -4,6 +4,7 @@ import LinesJoined from './LinesJoined'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 import ProfilePage from './ProfilePage'
+import UserWebSocket from './UserWebSocket'
 
 const panes = (props) => {
   const userId = props.user.id
@@ -22,6 +23,12 @@ class UserShowPage extends React.Component{
     user: this.props.user,
     lines: [],
     createdLines: []
+  }
+
+  updateUserShowLines = (data) => {
+    this.setState({
+      lines: data
+    })
   }
 
   componentWillMount(){
@@ -48,6 +55,7 @@ class UserShowPage extends React.Component{
   render(){
     return(
       <Container textAlign="center" className="Site">
+      <UserWebSocket data-cableApp={this.props['data-cableApp']} data-updateUserShowLines={this.updateUserShowLines} data-user={this.props.user} />
       <Grid>
         <Grid.Row>
           <Grid.Column width={2}>

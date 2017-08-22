@@ -114,7 +114,7 @@ class App extends React.Component {
     }
     fetch(`${APIURL()}/lines_users`, options)
       .then(this.handleResponse)
-    this.props.cableApp.line.send({code: this.state.joinLine.code})
+    // this.props.cableApp.line.send({code: this.state.joinLine.code})
   }
 
   handleResponse = (resp) => {
@@ -233,7 +233,7 @@ class App extends React.Component {
 
         < Route exact path='/signup' component={SignUp} />
         < Route exact path ='/' render={(props)=>(
-          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
+          !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user} data-cableApp={this.props.cableApp}/>
         )} />
 
 
