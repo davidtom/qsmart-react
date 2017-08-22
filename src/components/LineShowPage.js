@@ -12,10 +12,11 @@ class LineShowPage extends React.Component {
   }
 
   render(){
-    console.log("render", this.props)
     return (
       <Container textAlign="center" className="Site">
-      <Line data={this.props.lineData} />
+      <Line lineData={this.props.lineData}
+            authData={this.props.authData}
+            removeUserFromLine={this.props.removeUserFromLine}/>
       </Container>
     )
   }

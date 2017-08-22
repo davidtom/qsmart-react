@@ -179,6 +179,16 @@ class App extends React.Component {
       }
   }
 
+  removeUserFromLine = (userId, lineId) => {
+    let options = {
+      method: "DELETE",
+      headers: headers()
+    }
+    fetch(`${APIURL()}/lines_users/data?user=${userId}&line=${lineId}`, options)
+    .then(this.getLineData(lineId))
+    // NOTE: it looks like the get request is happening before the delete request!?!
+  }
+
   render() {
     // console.log(this.state.auth.isLoggedIn)
     return (
@@ -199,6 +209,8 @@ class App extends React.Component {
               {...props}
               getLineData={this.getLineData}
               lineData={this.state.line}
+              authData={this.state.auth}
+              removeUserFromLine={this.removeUserFromLine}
             />
           )} />
 
