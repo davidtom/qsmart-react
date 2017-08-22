@@ -216,7 +216,6 @@ class App extends React.Component {
             />
           )} />
 
-          // Pass in props as data-attributes
         < Route path = "/lines/:id" render={(props)=>(
             < LineShowPage
               {...props}
