@@ -3,7 +3,7 @@ import './App.css';
 import {Route} from "react-router-dom"
 import { Redirect } from 'react-router'
 import {APIURL} from "./components/PageAssets"
-import NavBar from './components/Navbar';
+import NavBar from './components/NavBar';
 import LineShowPage from './components/LineShowPage';
 import {SiteFooter} from "./components/PageAssets";
 import Auth from './services/AuthAdapter'
@@ -114,7 +114,7 @@ class App extends React.Component {
     }
     fetch(`${APIURL()}/lines_users`, options)
       .then(this.handleResponse)
-    this.props.cableApp.line.send({code: this.state.joinLine.code})
+    // this.props.cableApp.line.send({code: this.state.joinLine.code})
   }
 
   handleResponse = (resp) => {

@@ -11,8 +11,8 @@ const panes = (props) => {
   const createdLines = props.createdLines
   return(
     [
-      { menuItem: 'Lines Joined', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={lines}/></Tab.Pane> },
-      { menuItem: 'Lines Created', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={createdLines}/></Tab.Pane> }
+      { menuItem: 'Lines Joined', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={lines} isCreated={false}/></Tab.Pane> },
+      { menuItem: 'Lines Created', render: (props) => <Tab.Pane><LinesJoined userId={userId} lines={createdLines} isCreated={true}/></Tab.Pane> }
     ]
   )
 }
