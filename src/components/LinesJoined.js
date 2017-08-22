@@ -57,9 +57,14 @@ class LinesJoined extends React.Component{
   render(){
     return(
       <Card.Group>
+<<<<<<< HEAD
         {this.props.isCreated ? <CreateLineCard createLine={this.createLine} onChange={this.onChange}/> : null}
         {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index} data-cableApp={this.props['data-cableApp']} />)}
         {this.state.redirect && <Redirect to={`/lines/${this.state.lineId}`} />}
+=======
+        {this.props.isCreated ? <CreateListCard createList={this.createList} onChange={this.onChange}/> : null}
+        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} data-cableApp={this.props['data-cableApp']} key={index} />)}
+>>>>>>> Working UserShow websockets for total users in each line
       </Card.Group>
     )
   }

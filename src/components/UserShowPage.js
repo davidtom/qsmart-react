@@ -4,7 +4,7 @@ import LinesJoined from './LinesJoined'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 import ProfilePage from './ProfilePage'
-// import UserWebSocket from './UserWebSocket'
+import UserWebSocket from './UserWebSocket'
 
 const panes = (props, cableApp) => {
   const userId = props.user.id
