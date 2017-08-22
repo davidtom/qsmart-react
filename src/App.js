@@ -41,11 +41,10 @@ class App extends React.Component {
   updateAppStateLine = (newUsers) => {
     this.setState({
       line: {
-        line: this.state.line.line,
+        ...this.state.line,
         users: newUsers
       }
     })
-    setTimeout(()=>{console.log(this.state.line)}, 1700)
   }
 
   logIn=(loginParams)=>{
@@ -224,6 +223,7 @@ class App extends React.Component {
               data-cableApp={this.props.cableApp}
               data-updateApp={this.updateAppStateLine}
               data-lineData={this.state.lineData}
+              data-getLineData={this.getLineData}
               getLineData={this.getLineData}
               lineData={this.state.line}
               authData={this.state.auth}

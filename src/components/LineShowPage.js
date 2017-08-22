@@ -6,7 +6,7 @@ import { Container } from 'semantic-ui-react'
 
 class LineShowPage extends React.Component {
 
-  componentWillMount(){
+  componentDidMount(){
     // if (!this.props.lineData.line.size) {
       this.props.getLineData(window.location.href.match(/\d$/)[0])
       console.log(this.props.lineData)
@@ -18,7 +18,8 @@ class LineShowPage extends React.Component {
   render(){
     return (
       <Container textAlign="center" className="Site">
-        <LineWebSocket data-cableApp={this.props['data-cableApp']} data-updateApp={this.props['data-updateApp']} data-lineData={this.props['data-lineData']} />
+        <LineWebSocket data-cableApp={this.props['data-cableApp']} data-updateApp={this.props['data-updateApp']} data-lineData={this.props['data-lineData']}
+        data-getLineData={this.props['data-getLineData']}/>
         <Line lineData={this.props.lineData}
             authData={this.props.authData}
             removeUserFromLine={this.props.removeUserFromLine}/>
