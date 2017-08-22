@@ -8,26 +8,8 @@ div.nav {
   float: left;
 }
 
-div.user-in-line-container {
-  vertical-align: middle;
-}
-
-div.position-in-line {
+img.line-image {
   float: left;
-  text-align: left;
-  width: 5%;
-}
-
-img.user-in-line {
-  float: left;
-}
-
-p.user-in-line {
-  margin-left: 5em;
-}
-
-a.remove-user-in-line {
-  float: right;
 }
 
 #page-header {
@@ -36,11 +18,19 @@ a.remove-user-in-line {
 
 #section-header {
   color: white;
-  background-color: rgb(8, 60, 142);
+  background-color: rgb(33, 186, 69);
 }
 
 p, li {
   font-size: 1.5rem;
+}
+
+p.footnote {
+  font-size: 1rem;
+}
+
+label.asterisk {
+  color: red;
 }
 
 /*Sticky Footer*/
