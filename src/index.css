@@ -8,6 +8,10 @@ div.nav {
   float: left;
 }
 
+img.line-image {
+  float: left;
+}
+
 div.user-in-line-container {
   vertical-align: middle;
 }
@@ -36,7 +40,7 @@ a.remove-user-in-line {
 
 #section-header {
   color: white;
-  background-color: rgb(8, 60, 142);
+  background-color: rgb(33, 186, 69);
 }
 
 p, li {

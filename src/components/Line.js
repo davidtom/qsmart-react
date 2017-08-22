@@ -1,5 +1,5 @@
 import React from 'react';
-import {PageHeader} from "./PageAssets";
+import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
 import { Segment } from 'semantic-ui-react'
 
@@ -19,9 +19,9 @@ const Line = (props) => {
 
   return(
     <Segment>
+      <img className="line-image" src={props.lineData.line.image_url} alt="Line"/>
       <PageHeader title={props.lineData.line.name}/>
-      <b><p>Code: {props.lineData.line.code}</p></b>
-      <img src={props.lineData.line.image_url} alt="Line"/>
+      <SectionHeader title={`Code: ${props.lineData.line.code}`}/>
         {displayLineMembers()}
     </Segment>
   )

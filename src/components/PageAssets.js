@@ -1,15 +1,15 @@
 import React from "react"
-import { Header, Loader } from 'semantic-ui-react'
+import logo from "./images/QSmart_Logo_v1.png"
+import { Header, Loader, Image } from 'semantic-ui-react'
 
 const APIURL = () => (
   "http://localhost:3000/api/v1"
   // "https://qsmart-api.herokuapp.com/api/v1"
 )
 
-// const SiteLogo = () => (
-//   // TODO: Find a logo
-//   <Image shape='rounded' height="70" verticalAlign="middle" spaced src='./soccer-silhouette-image.png' />
-// )
+const SiteLogo = () => (
+  <Image shape='rounded' inline spaced src={logo} alt="QSmart"/>
+)
 
 const SiteHeader = () => (
   <Header size="huge">QSmart</Header>
@@ -20,7 +20,7 @@ const PageHeader = (props) => (
 )
 
 const SectionHeader = (props) => (
-  <Header id="section-header" size="huge" block onClick={props.onClick}>{props.title}</Header>
+  <Header id="section-header" size="huge" onClick={props.onClick}>{props.title}</Header>
 )
 
 const contentLoader = () => (
@@ -32,7 +32,7 @@ const SiteFooter = () => (
 )
 
 export {APIURL}
-// export {SiteLogo}
+export {SiteLogo}
 export {SiteHeader}
 export {PageHeader}
 export {SectionHeader}

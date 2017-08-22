@@ -1,8 +1,9 @@
 import React from 'react';
+import {SiteLogo} from "./PageAssets";
 import JoinLine from "./JoinLine"
 import UserNav from "./UserNav"
 import LoginSignUp from './LoginSignUp'
-import { Segment, Container, Grid } from 'semantic-ui-react'
+import { Segment, Container, Grid, Image } from 'semantic-ui-react'
 
 class NavBar extends React.Component{
 
@@ -12,6 +13,9 @@ class NavBar extends React.Component{
       <Segment>
       <Container>
         <Grid>
+          <Grid.Column>
+            <SiteLogo />
+          </Grid.Column>
             <Grid.Column floated='left' width={10}>
             < JoinLine
               updateCode={this.props.updateCode}
