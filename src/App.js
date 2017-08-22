@@ -215,7 +215,9 @@ class App extends React.Component {
           )} />
 
 
-        < Route exact path='/signup' component={SignUp} />
+        < Route exact path='/signup' render={(props)=>(
+          !this.state.auth.isLoggedIn ? <SignUp {...props} login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
+        )} />
         < Route exact path ='/' render={(props)=>(
           !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
         )} />
