@@ -25,8 +25,8 @@ class UserShowPage extends React.Component{
   }
 
   componentWillMount(){
-
-    fetch(`${APIURL()}/users/${this.props.userId}/created_lines`,{headers:headers()})
+    // console.log(this.props.user)
+    fetch(`${APIURL()}/users/${this.props.user.id}/created_lines`,{headers:headers()})
     .then(resp=>resp.json())
     .then(lines=>{
       this.setState({
@@ -34,7 +34,7 @@ class UserShowPage extends React.Component{
       })
     })
 
-    fetch(`${APIURL()}/users/${this.props.userId}/lines`,{headers:headers()})
+    fetch(`${APIURL()}/users/${this.props.user.id}/lines`,{headers:headers()})
     .then(resp=>resp.json())
     .then(lines=>{
       this.setState({

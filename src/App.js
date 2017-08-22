@@ -186,7 +186,7 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.auth.isLoggedIn)
+    // console.log("render",this.state.auth.user)
     return (
       <div>
         < Route path="/" render={(props)=>(
