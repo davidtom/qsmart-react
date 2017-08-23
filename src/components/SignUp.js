@@ -10,6 +10,7 @@ class SignUp extends React.Component{
     email: "",
     password: "",
     phone_number: "",
+    profile_image_url: "",
     errors: false,
     errorMessage: '',
     redirect: false
@@ -54,7 +55,8 @@ class SignUp extends React.Component{
           </Form.Group>
           <Form.Input label='Email' placeholder= 'Email' name='email' required onChange={this.onChange}/>
           <Form.Input label='Password' placeholder= 'Password' type='password' name='password' required onChange={this.onChange}/>
-          <Form.Input label='Phone Number (for text alerts)' placeholder='Phone' type="tel" name='phone_number' onChange={this.onChange}/>
+          <Form.Input label='Profile Image URL' placeholder='Profile Image URL' name='profile_image_url' onChange={this.onChange} />
+          <Form.Input label='Phone Number (for text alerts)' placeholder='Phone: (xxx)-xxx-xxxx' type="tel" name='phone_number' onChange={this.onChange}/>
           <p className="footnote"><label className="asterisk">*</label>required</p>
           <Form.Checkbox label='I agree to the Terms and Conditions' />
           <Button onClick={this.onClick}>Submit</Button>
