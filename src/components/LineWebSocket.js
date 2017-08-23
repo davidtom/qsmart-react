@@ -9,7 +9,6 @@ class LineWebSocket extends React.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props['data-getLineData'])
     this.props['data-getLineData'](window.location.href.match(/\d+$/)[0])
     this.props['data-cableApp'].line = this.props['data-cableApp'].cable.subscriptions.create({channel: "LineChannel", room: window.location.href.match(/\d+$/)[0]}, {
       received: (newUsers) => {
