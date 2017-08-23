@@ -42,12 +42,12 @@ class App extends React.Component {
   }
 
   // Callback function to setState in App from Line ActionCable
-  updateAppStateLine = (newUsers) => {
+  updateAppStateLine = (newLine) => {
     console.log('updateAppStateLine: ', this.state.line)
     this.setState({
       line: {
-        ...this.state.line,
-        users: newUsers
+        line: newLine.line,
+        users: newLine.users
       }
     })
   }
