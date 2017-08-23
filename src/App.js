@@ -57,7 +57,6 @@ class App extends React.Component {
         if (!user.error) {
           this.setState({
             auth:{
-              isLoggedIn: true,
               user: user
             }
           })
