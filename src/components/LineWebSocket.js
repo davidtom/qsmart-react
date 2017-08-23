@@ -1,25 +1,12 @@
 import React from 'react'
-<<<<<<< HEAD
-// import actionCable from 'actioncable'
-// import App from '../App'
-=======
 import actionCable from 'actioncable'
-<<<<<<< HEAD
->>>>>>> Working UserShow websockets for total users in each line
 
-
-class LineWebSocket extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-=======
 
 
 class LineWebSocket extends React.Component {
   constructor(props) {
     super(props)
   }
->>>>>>> ca7819c8a151c194b98d20f264c56d9382e0ebd2
 
   componentDidMount() {
     // console.log(this.props['data-getLineData'])
