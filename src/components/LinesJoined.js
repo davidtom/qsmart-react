@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import {Card, Icon, Form, Input, Button} from 'semantic-ui-react'
+import {Card, Icon, Form, Input, Button, Container, Divider} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import LineJoined from './LineJoined'
 import {headers} from '../services/AuthAdapter'
@@ -9,15 +9,19 @@ import {headers} from '../services/AuthAdapter'
 const CreateLineCard = (props) =>{
   return(
     <Card>
-      <Card.Header className="create-list-header">
-        <b>Create New Line:</b>
-      </Card.Header>
+      <Card.Content>
+        <Card.Header className="create-list-header">
+          <b>Create New Line:</b>
+        </Card.Header>
+      </Card.Content>
       <Card.Description>
-        <Form>
-          <Form.Input name='name' placeholder='Line Name' onChange={props.onChange} required/>
-          <Form.Input name='imageURL' placeholder='Image URL (optional)' onChange={props.onChange} /><br/>
-          <Button type="submit" name='add square' size='large' color="green" onClick={props.createLine}>Create</Button>
-        </Form>
+        <Card.Content>
+          <Form>
+            <Form.Input name='name' placeholder='Line Name' onChange={props.onChange} required/>
+            <Form.Input name='imageURL' placeholder='Image URL (optional)' onChange={props.onChange} /><br/>
+            <Button type="submit" name='add square' size='large' color="green" onClick={props.createLine}>Create</Button>
+          </Form>
+        </Card.Content>
       </Card.Description>
     </Card>
   )
@@ -60,12 +64,9 @@ class LinesJoined extends React.Component{
         {this.props.isCreated ? <CreateLineCard createLine={this.createLine} onChange={this.onChange}/> : null}
         {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index} data-cableApp={this.props['data-cableApp']} />)}
         {this.state.redirect && <Redirect to={`/lines/${this.state.lineId}`} />}
-        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} data-cableApp={this.props['data-cableApp']} key={index} />)}
       </Card.Group>
     )
   }
 }
 
 export default LinesJoined
-
-// <Icon name='add square' size='huge' onClick={props.createList}/>
