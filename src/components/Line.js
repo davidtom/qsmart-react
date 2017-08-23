@@ -1,7 +1,7 @@
 import React from 'react';
 import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
-import { Segment } from 'semantic-ui-react'
+import { Segment, Transition } from 'semantic-ui-react'
 
 
 
@@ -21,7 +21,12 @@ const Line = (props) => {
       <img className="line-image" src={props.lineData.line.image_url} alt="QSmart Line"/>
       <PageHeader title={props.lineData.line.name}/>
       <SectionHeader title={`Code: ${props.lineData.line.code}`}/>
+        <Transition.Group
+            animation="fly left"
+            duration={1000}
+        >
         {displayLineMembers()}
+      </Transition.Group>
     </Segment>
   )
 }

@@ -146,7 +146,7 @@ class App extends React.Component {
       this.setState({
         joinLine: {
         ...this.state.joinLine,
-        error: "Please Log In To Join A Line!"
+        error: <p>Please <a href='/'>login</a> to join a line!</p>
         }
       })
     }  else if (resp.status === 404){
