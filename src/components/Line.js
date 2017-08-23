@@ -9,7 +9,7 @@ import {headers} from '../services/AuthAdapter'
 
 class Line extends React.Component{
   state = {
-    isChecked: this.props.lineData.line.active
+    isChecked: ''
   }
 
   displayLineMembers = () => {
@@ -25,17 +25,27 @@ class Line extends React.Component{
     fetch(`${APIURL()}/lines/${lineId}`,{
       method: 'PATCH',
       headers: headers()
-    }).then(this.setState({
-      isChecked: !this.state.isChecked
-    }))
+    }).then(()=>{
+      if (this.state.isChecked === ''){
+        this.setState({
+          isChecked: !this.props.lineData.line.active
+        })
+    } else {
+      this.setState({
+        isChecked: !this.state.isChecked
+      })
+    }    
+    })
   }
 
+
   render(){
+
     return(
       <Segment>
         <Image className="line-image" size="small" src={this.props.lineData.line.image_url} alt="QSmart Line"/>
         <PageHeader title={this.props.lineData.line.name}/>
-        <Radio toggle checked={this.state.isChecked} label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />
+        <Radio toggle checked={this.state.isChecked === '' ? this.props.lineData.line.active :this.state.isChecked } label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />
         <Divider section hidden clearing={true}/>
         <SectionHeader title={`Code: ${this.props.lineData.line.code}`}/>
           <Transition.Group
