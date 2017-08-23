@@ -3,7 +3,7 @@ import {APIURL} from "../components/PageAssets"
 
 export default class AuthAdapter {
   static login (loginParams) {
-    return fetch(`${APIURL()}/user_token`, {
+    return fetch(`https://qsmart-api.herokuapp.com/user_token`, {
       method: 'POST',
       headers: headers(),
       body: JSON.stringify(loginParams)
