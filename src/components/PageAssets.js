@@ -3,8 +3,8 @@ import logo from "./images/QSmart_Logo_v1.png"
 import { Header, Loader, Image } from 'semantic-ui-react'
 
 const APIURL = () => (
-  "http://localhost:3000/api/v1"
-  // "https://qsmart-api.herokuapp.com/api/v1"
+  // "http://localhost:3000/api/v1"
+  "https://qsmart-api.herokuapp.com/api/v1"
 )
 
 const SiteLogo = () => (

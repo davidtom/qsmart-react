@@ -10,7 +10,7 @@ import 'semantic-ui-css/semantic.min.css';
 import actionCable from 'actioncable'
 
 const CableApp = {}
-CableApp.cable = actionCable.createConsumer(`ws://${window.location.hostname}:3000/cable`)
+CableApp.cable = actionCable.createConsumer(`wss://qsmart-api.herokuapp.com/cable`)
 
 // Pass in CableApp as cableApp prop
 ReactDOM.render(<Router><App cableApp={CableApp} /></Router>, document.getElementById('root'));
