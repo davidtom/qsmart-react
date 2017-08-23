@@ -2,7 +2,7 @@ import React from 'react';
 import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
 
-import { Segment, Divider, Transition, Image, Radio} from 'semantic-ui-react'
+import { Segment, Divider, Transition, List, Image, Radio} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 
@@ -39,8 +39,11 @@ class Line extends React.Component{
         <Divider section hidden clearing={true}/>
         <SectionHeader title={`Code: ${this.props.lineData.line.code}`}/>
           <Transition.Group
-              animation="fly left"
-              duration={1000}
+            as={List}
+            duration={2000}
+            divided
+            animation="fly up"
+            verticalAlign='middle'
           >
           {this.displayLineMembers()}
         </Transition.Group>
