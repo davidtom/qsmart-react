@@ -1,9 +1,9 @@
 import {APIURL} from "../components/PageAssets"
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
 
 export default class AuthAdapter {
   static login (loginParams) {
-    return fetch(`${baseUrl}/user_token`, {
+    return fetch(`${APIURL()}/user_token`, {
       method: 'POST',
       headers: headers(),
       body: JSON.stringify(loginParams)
