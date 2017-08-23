@@ -157,13 +157,15 @@ class App extends React.Component {
         }
       })
     } else if (resp.status === 422){
-      resp.json().then(json => console.log(json))
-      this.setState({
+      resp.json().then(json => {
+        let lineURL = `/lines/${json.line.id}`
+        this.setState({
         joinLine: {
         ...this.state.joinLine,
-        error: "You are already waiting in that line!"
+        lineId: json.line.id,
+        error: <p>You are already waiting in that line - <a href={lineURL}> view it here.</a></p>
         }
-      })
+      })})
     }
   }
 

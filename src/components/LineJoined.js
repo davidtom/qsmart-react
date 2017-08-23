@@ -21,7 +21,7 @@ class LineJoined extends  React.Component{
     const newTime = time.toTimeString()
     return(
       <Card onClick={this.onCardClick} name={`${this.props.line.id}`}>
-        <Image src={this.props.line.image_url} />
+        <Image size="small" centered src={this.props.line.image_url} />
         <Card.Content>
           <Card.Header>
             {this.props.line.name}
