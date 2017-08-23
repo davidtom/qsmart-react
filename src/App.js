@@ -157,15 +157,26 @@ class App extends React.Component {
         }
       })
     } else if (resp.status === 422){
-      resp.json().then(json => {
-        let lineURL = `/lines/${json.line.id}`
-        this.setState({
-        joinLine: {
-        ...this.state.joinLine,
-        lineId: json.line.id,
-        error: <p>You are already waiting in that line - <a href={lineURL}> view it here.</a></p>
+      resp.json().then((json) => {
+        if (json.line.active===false){
+          this.setState({
+            joinLine: {
+            ...this.state.joinLine,
+            error: "The line is not active at this time"
+            }
+          })
+        } else {
+            let lineURL = `/lines/${json.line.id}`
+            this.setState({
+            joinLine: {
+            ...this.state.joinLine,
+            lineId: json.line.id,
+            error: <p>You are already waiting in that line - <a href={lineURL}> view it here.</a></p>
+            }
+          })
         }
-      })})
+
+      })
     }
   }
 
@@ -222,7 +233,7 @@ class App extends React.Component {
           !this.state.auth.isLoggedIn ? < Login login={this.logIn}/> : <UserShowPage user={this.state.auth.user}/>
         )} />
 
-        {this.state.joinLine.redirect && <Redirect to={`/lines/${this.state.joinLine.lineId}`} />}
+        {this.state.joinLine.redirect ? <Redirect to={`/lines/${this.state.joinLine.lineId}`} /> : null}
 
       < SiteFooter />
       </div>
