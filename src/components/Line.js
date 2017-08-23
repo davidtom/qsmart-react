@@ -2,7 +2,7 @@ import React from 'react';
 import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
 
-import { Segment, Divider, Transition, Image, Radio} from 'semantic-ui-react'
+import { Segment, Divider, Image, Radio} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 
@@ -34,7 +34,7 @@ class Line extends React.Component{
       this.setState({
         isChecked: !this.state.isChecked
       })
-    }    
+    }
     })
   }
 
@@ -48,12 +48,7 @@ class Line extends React.Component{
         <Radio toggle checked={this.state.isChecked === '' ? this.props.lineData.line.active :this.state.isChecked } label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />
         <Divider section hidden clearing={true}/>
         <SectionHeader title={`Code: ${this.props.lineData.line.code}`}/>
-          <Transition.Group
-              animation="fly left"
-              duration={1000}
-          >
           {this.displayLineMembers()}
-        </Transition.Group>
       </Segment>
     )
 
