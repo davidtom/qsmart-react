@@ -36,7 +36,7 @@ class LineJoined extends  React.Component{
     const time = new Date(this.props.line.created_at)
     const newTime = time.toTimeString()
     return(
-      <Card onClick={this.onCardClick} name={`${this.props.line.id}`}>
+      <Card onClick={this.onCardClick} name={`${this.props.line.id}`} color={this.props.line.active ? 'green' : 'red'}>
         <LineJoinedWebSocket data-cableApp={this.props['data-cableApp']} data-updateLineJoined={this.updateLineJoined} data-line={this.props.line} />
         <Image size="small" centered src={this.props.line.image_url} />
         <Card.Content>
