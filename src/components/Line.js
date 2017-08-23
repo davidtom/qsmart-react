@@ -1,29 +1,48 @@
 import React from 'react';
 import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
-import { Segment } from 'semantic-ui-react'
+import { Segment, Radio } from 'semantic-ui-react'
+import {APIURL} from './PageAssets'
+import {headers} from '../services/AuthAdapter'
 
 
 
-const Line = (props) => {
+class Line extends React.Component{
+  state = {
+    isChecked: this.props.lineData.line.active
+  }
 
-  function displayLineMembers(auth, lineOwnerId){
-    return props.lineData.users.map((user, index) =>
+  displayLineMembers = () => {
+    return this.props.lineData.users.map((user, index) =>
     <UserInLine user={user}
-                authData={props.authData}
-                lineData={props.lineData}
+                authData={this.props.authData}
+                lineData={this.props.lineData}
                 position={index+1}
                 key={index}/>)
   }
 
-  return(
-    <Segment>
-      <img className="line-image" src={props.lineData.line.image_url} alt="QSmart Line"/>
-      <PageHeader title={props.lineData.line.name}/>
-      <SectionHeader title={`Code: ${props.lineData.line.code}`}/>
-        {displayLineMembers()}
-    </Segment>
-  )
+  onClick = (lineId) => {
+    fetch(`${APIURL()}/lines/${lineId}`,{
+      method: 'PATCH',
+      headers: headers()
+    }).then(this.setState({
+      isChecked: !this.state.isChecked
+    }))
+  }
+
+  render(){
+    return(
+      <Segment>
+        <img className="line-image" src={this.props.lineData.line.image_url} alt="QSmart Line"/>
+        <PageHeader title={this.props.lineData.line.name}/>
+        <Radio toggle checked={this.state.isChecked} label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />
+        <SectionHeader title={`Code: ${this.props.lineData.line.code}`}/>
+          {this.displayLineMembers()}
+      </Segment>
+    )
+
+  }
+
 }
 
 export default Line;

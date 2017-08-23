@@ -11,6 +11,7 @@ class SignUp extends React.Component{
     password: "",
     phone_number: "",
     errors: false,
+    errorMessage: '',
     redirect: false
   }
 
@@ -29,12 +30,13 @@ class SignUp extends React.Component{
       body: JSON.stringify(this.state)
     }
     fetch(`${APIURL()}/users`,options)
+    .then(resp=>resp.json())
     .then(this.handleResponse)
   }
 
   handleResponse = (resp) => {
     if (resp.status === 400){
-      this.setState({errors: true})
+      this.setState({errors: true, errorMessage: resp.messages[0]})
     } else if (resp.status === 200){
       this.props.logIn({auth: {email: this.state.email, password:this.state.password}})
       this.setState({redirect:true})
@@ -44,7 +46,7 @@ class SignUp extends React.Component{
   render(){
     return(
       <Container>
-        {this.state.errors && <Message negative>Email or phone number already in use!</Message>}
+        {this.state.errors && <Message negative>{this.state.errorMessage}</Message>}
         <Form >
           <Form.Group widths='equal'>
             <Form.Input label='First name' placeholder='First name' name='first_name' required onChange={this.onChange}/>
@@ -55,7 +57,7 @@ class SignUp extends React.Component{
           <Form.Input label='Phone Number (for text alerts)' placeholder='Phone' type="tel" name='phone_number' onChange={this.onChange}/>
           <p className="footnote"><label className="asterisk">*</label>required</p>
           <Form.Checkbox label='I agree to the Terms and Conditions' />
-          <Button onSubmit={this.onClick}>Submit</Button>
+          <Button onClick={this.onClick}>Submit</Button>
         </Form>
         {this.state.redirect && <Redirect to={"/"} />}
       </Container>
