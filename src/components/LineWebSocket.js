@@ -2,10 +2,11 @@ import React from 'react'
 import actionCable from 'actioncable'
 
 
+
 class LineWebSocket extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+  constructor(props) {
+    super(props)
+  }
 
   componentDidMount() {
     // console.log(this.props['data-getLineData'])
