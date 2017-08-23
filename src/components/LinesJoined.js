@@ -46,8 +46,8 @@ class LinesJoined extends React.Component{
   render(){
     return(
       <Card.Group>
-        {this.props.isCreated ? <CreateListCard createList={this.createList} onChangge={this.onChange}/> : null}
-        {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} data-cableApp={this.props['data-cableApp']} key={index} />)}
+        {this.props.isCreated ? <CreateListCard createList={this.createList} onChange={this.onChange}/> : null}
+        {this.props.lines.map((line, index)=><LineJoined line={line} userId={this.props.userId} isCreated={this.props.isCreated} data-cableApp={this.props['data-cableApp']} key={index} />)}
       </Card.Group>
     )
   }
