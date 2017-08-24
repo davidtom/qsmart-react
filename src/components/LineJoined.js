@@ -15,13 +15,14 @@ class LineJoined extends  React.Component{
     }
   }
 
-  updateLineJoined = (newUsers) => {
+  updateLineJoined = (newData) => {
+    console.log(newData)
     const userId = this.props.userId
-    const newUserIndex = newUsers.findIndex( (user) => { return user.id === userId })
-    const newUserPlace = newUserIndex + 1
+    // const newUserIndex = newData.users.findIndex( (user) => { return user.id === userId })
+    // const newUserPlace = newUserIndex + 1
     this.setState({
-      userCount: newUsers.length,
-      userPlace: newUserPlace
+      userCount: newData.users.length,
+      userPlace: newData.line.userPlace
     })
   }
 
