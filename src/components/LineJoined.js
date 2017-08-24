@@ -16,11 +16,12 @@ class LineJoined extends  React.Component{
   }
 
   updateLineJoined = (newUsers) => {
-    console.log(newUsers)
     const userId = this.props.userId
+    const newUserIndex = newUsers.findIndex( (user) => { return user.id === userId })
+    const newUserPlace = newUserIndex + 1
     this.setState({
       userCount: newUsers.length,
-      userPlace: newUsers.findIndex( (user) => { return user.id === userId }) + 1
+      userPlace: newUserPlace
     })
   }
 
@@ -55,7 +56,7 @@ class LineJoined extends  React.Component{
         <Card.Content extra>
           <a>
             <Icon name='users' />
-            {this.props.isCreated ? `Total in Line: ${this.state.userCount}` : `Position: ${this.state.userPlace}/${this.state.userCount}` }
+            { this.props.isCreated ? `Total in Line: ${this.state.userCount}` : `Position: ${this.state.userPlace}/${this.state.userCount}` }
           </a>
         </Card.Content>
         {this.state.clicked ? <Redirect to={`/lines/${this.state.listId}`}/> : null}

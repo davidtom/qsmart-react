@@ -1,12 +1,6 @@
 import React from 'react'
-import actionCable from 'actioncable'
-
-
 
 class LineWebSocket extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.props['data-getLineData'](window.location.href.match(/\d+$/)[0])

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import {Card, Icon, Form, Input, Button, Container, Divider} from 'semantic-ui-react'
-import {APIURL} from './PageAssets'
+import { Card, Form, Button } from 'semantic-ui-react'
+import { APIURL } from './PageAssets'
 import LineJoined from './LineJoined'
-import {headers} from '../services/AuthAdapter'
+import { headers } from '../services/AuthAdapter'
 
 
 const CreateLineCard = (props) =>{
@@ -61,7 +61,7 @@ class LinesJoined extends React.Component{
   render(){
     return(
       <Card.Group>
-        {this.props.isCreated ? <CreateLineCard createLine={this.createLine} onChange={this.onChange}/> : null}
+        {this.props.isCreated ? <CreateLineCard createLine={this.createLine} onChange={this.onChange} /> : null}
         {this.props.lines.map((line, index)=><LineJoined line={line} isCreated={this.props.isCreated} key={index} data-cableApp={this.props['data-cableApp']} />)}
         {this.state.redirect && <Redirect to={`/lines/${this.state.lineId}`} />}
       </Card.Group>

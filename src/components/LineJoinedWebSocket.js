@@ -2,9 +2,6 @@ import React from 'react'
 import actionCable from 'actioncable'
 
 class LineJoinedWebSocket extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     const CableAppUser = {}
