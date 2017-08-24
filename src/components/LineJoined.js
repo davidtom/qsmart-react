@@ -10,6 +10,7 @@ class LineJoined extends  React.Component{
     this.state = {
      clicked: false,
      listId: '',
+     userId: this.props.userId
      userCount: this.props.line.userCount,
      userPlace: this.props.line.userPlace
     }
@@ -18,11 +19,11 @@ class LineJoined extends  React.Component{
   updateLineJoined = (newData) => {
     console.log(newData)
     const userId = this.props.userId
-    // const newUserIndex = newData.users.findIndex( (user) => { return user.id === userId })
-    // const newUserPlace = newUserIndex + 1
+    const newUserIndex = newData.users.findIndex( (user) => { return user.id === userId })
+    const newUserPlace = newUserIndex + 1
     this.setState({
       userCount: newData.users.length,
-      userPlace: newData.line.userPlace
+      userPlace: newUserPlace
     })
   }
 
