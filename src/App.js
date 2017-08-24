@@ -158,7 +158,7 @@ class App extends React.Component {
       this.setState({
         joinLine: {
         ...this.state.joinLine,
-        error: "Invalid Line Code"
+        error: <p>Invalid Line Code</p>
         }
       })
     } else if (resp.status === 422){
@@ -167,7 +167,7 @@ class App extends React.Component {
           this.setState({
             joinLine: {
             ...this.state.joinLine,
-            error: "The line is not active at this time"
+            error: <p>The line is not active at this time</p>
             }
           })
         } else {

@@ -2,7 +2,7 @@ import React from 'react';
 import {PageHeader, SectionHeader} from "./PageAssets";
 import UserInLine from "./UserInLine"
 
-import { Segment, Divider, Transition, Image, Radio} from 'semantic-ui-react'
+import { Segment, Divider, Image, Radio} from 'semantic-ui-react'
 import {APIURL} from './PageAssets'
 import {headers} from '../services/AuthAdapter'
 
