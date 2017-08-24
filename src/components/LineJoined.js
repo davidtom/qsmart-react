@@ -10,7 +10,6 @@ class LineJoined extends  React.Component{
     this.state = {
      clicked: false,
      listId: '',
-     userId: this.props.userId
      userCount: this.props.line.userCount,
      userPlace: this.props.line.userPlace
     }
