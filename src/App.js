@@ -240,7 +240,6 @@ class App extends React.Component {
 
         {this.state.joinLine.redirect ? <Redirect to={`/lines/${this.state.joinLine.lineId}`} /> : null}
 
-      < SiteFooter />
       </div>
     )
   }
