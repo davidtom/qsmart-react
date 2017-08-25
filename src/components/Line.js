@@ -38,14 +38,18 @@ class Line extends React.Component{
     })
   }
 
+  lineOwner(){
+    // return true
+    return this.props.authData.user.id === this.props.lineData.line.owner_id
+  }
 
   render(){
-
+    console.log(this.props)
     return(
       <Segment>
         <Image className="line-image" size="small" src={this.props.lineData.line.image_url} alt="QSmart Line"/>
         <PageHeader title={this.props.lineData.line.name}/>
-        <Radio toggle checked={this.state.isChecked === '' ? this.props.lineData.line.active :this.state.isChecked } label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />
+        {this.lineOwner() && <Radio toggle checked={this.state.isChecked === '' ? this.props.lineData.line.active :this.state.isChecked } label='Active' onClick={()=>this.onClick(this.props.lineData.line.id)} />}
         <Divider section hidden clearing={true}/>
         <SectionHeader title={`Code: ${this.props.lineData.line.code}`}/>
           {this.displayLineMembers()}
